@@ -7,7 +7,7 @@
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
-        Title="Home"
+        Title="Tavel Planner"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 

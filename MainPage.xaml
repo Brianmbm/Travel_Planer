@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travel_Planer.MainPage"
-
-            xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps">
-
-        <maps:Map x:Name="map" />
-
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps">
+    <VerticalStackLayout>
+        <maps:Map x:Name="map" HeightRequest ="500" WidthRequest="500"/>
+        <Button Text="Save new trip" Clicked="Button_Clicked"></Button>
+        <Button Text="TestButton" Clicked="Button_Clicked"/>
+    </VerticalStackLayout>
 </ContentPage>
