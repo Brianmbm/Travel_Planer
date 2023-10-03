@@ -4,8 +4,9 @@
              x:Class="Travel_Planer.MainPage"
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps">
     <VerticalStackLayout>
-        <maps:Map x:Name="map" HeightRequest ="500" WidthRequest="500"/>
+        <maps:Map x:Name="map" MapClicked="OnMapClicked" HeightRequest ="500" WidthRequest="500"/>
         <Button Text="Save new trip" Clicked="Button_Clicked"></Button>
         <Button Text="TestButton" Clicked="Button_Clicked"/>
+        <Label x:Name="locationClick" Text="Location"/>
     </VerticalStackLayout>
 </ContentPage>

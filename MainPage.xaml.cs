@@ -21,5 +21,9 @@ namespace Travel_Planer
             });
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location (50, 6), Distance.FromKilometers(10)));
         }
+        void OnMapClicked(object sender, MapClickedEventArgs e)
+        {
+            locationClick.Text=$"{e.Location.Latitude}, {e.Location.Longitude}";
+        }
     }
 }
