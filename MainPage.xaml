@@ -3,10 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travel_Planer.MainPage"
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps">
-    <VerticalStackLayout>
-        <maps:Map x:Name="map" MapClicked="OnMapClicked" HeightRequest ="500" WidthRequest="500"/>
+    <VerticalStackLayout x:Name ="stacken">
+
+        <maps:Map x:Name="map" MapClicked="OnMapClicked" HeightRequest ="500" WidthRequest="1000"/>
+
+        <AbsoluteLayout HorizontalOptions="Start" VerticalOptions="Start">
+            <Editor x:Name="editor"
+        Placeholder="Enter Destination Name"
+        TextChanged="OnEditorTextChanged"
+        Background="black"
+        AbsoluteLayout.LayoutBounds="500, -200, 300, 30"
+        Completed="OnEditorCompleted" />
+
+
+        </AbsoluteLayout>
         <Button Text="Save new trip" Clicked="Button_Clicked"></Button>
         <Button Text="TestButton" Clicked="Button_Clicked"/>
         <Label x:Name="locationClick" Text="Location"/>
+
+
+
+
+
+        <ListView>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="Destinations"
+                      Detail="hej" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
     </VerticalStackLayout>
+
+
 </ContentPage>
