@@ -4,8 +4,9 @@
              x:Class="Travel_Planner.MainPage"
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps">
     <Grid ColumnDefinitions="*,*"><!--two column grid-->
+
         <maps:Map x:Name="map" MapClicked="OnMapClicked" Grid.ColumnSpan="1" Grid.RowSpan="1" Grid.Column="1" Margin="10" />
-        <AbsoluteLayout HorizontalOptions="Start" VerticalOptions="Start">
+                <AbsoluteLayout HorizontalOptions="Start" VerticalOptions="Start">
             <Editor x:Name="editor"
                     Placeholder="Enter Destination Name"
                     TextChanged="OnEditorTextChanged"
@@ -30,12 +31,25 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <!-- Use Binding to bind to a property of the object-->
-                                <Label Grid.Column="1"
-                                    Text="{Binding coordinates}"
-                                    FontAttributes="Bold"
-                                       TextColor="red"/>
-                                
+                                <Border Stroke="orange"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 50,20,20,50"
+                                    Background= "orange"
+                                    Padding="16,8"
+                                    HorizontalOptions="Center">
+                                    <Label Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        TextColor="white"
+                                        BackgroundColor="Orange">
+                                        <Label.Text>
+                                            <!-- Use Binding to bind to a property of the object-->
+                                            <MultiBinding StringFormat="{}  Longitude = {0}| Latitude = {1}">
+                                            <Binding Path= "coordinates.Longitude"/>
+                                            <Binding Path= "coordinates.Latitude"/>
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                </Border>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

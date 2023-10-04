@@ -15,18 +15,10 @@ namespace Travel_Planner
 
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            map.Pins.Add(new Pin()
-            {
-                Location = new Location(50,6),
-                Label = "testbuttonlabel",
-                Address = "testbuttonaddress"
-            });
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location (50, 6), Distance.FromKilometers(10)));
-        }
         void OnMapClicked(object sender, MapClickedEventArgs e)
         {
+            
+            
             locationClick.Text=$"{e.Location.Latitude}, {e.Location.Longitude}";
             Location location = new Location(e.Location.Latitude, e.Location.Longitude);
             string label = "no name yet";
@@ -54,6 +46,16 @@ namespace Travel_Planner
         void OnEditorCompleted(object sender, EventArgs e)
         {
             string text = ((Editor)sender).Text;
+        }
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            map.Pins.Add(new Pin()
+            {
+                Location = new Location(50, 6),
+                Label = "testbuttonlabel",
+                Address = "testbuttonaddress"
+            });
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(50, 6), Distance.FromKilometers(10)));
         }
     }
 }
