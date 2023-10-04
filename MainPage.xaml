@@ -10,7 +10,6 @@
         <VerticalStackLayout x:Name ="stacken" Grid.Column="0">
             <Button Text="Save new trip" Clicked="Button_Clicked"/>
             <Button Text="TestButton" Clicked="Button_Clicked"/>
-            <Label x:Name="locationClick" Text="Location"/>
             <ListView x:Name="listView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -36,7 +35,7 @@
                                         BackgroundColor="Orange">
                                         <Label.Text>
                                             <!-- Use Binding to bind to a property of the object-->
-                                            <MultiBinding StringFormat="{}  Longitude = {0}| Latitude = {1} | Namn = {2}">
+                                            <MultiBinding StringFormat="{}  Longitude = {0}| Latitude = {1} | Name = {2}">
                                             <Binding Path= "coordinates.Longitude"/>
                                             <Binding Path= "coordinates.Latitude"/>
                                             <Binding Path="Name" />

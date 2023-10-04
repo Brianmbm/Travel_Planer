@@ -2,6 +2,8 @@
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 using Travel_Planner.Viewmodels;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace Travel_Planner
 {
     public partial class MainPage : ContentPage
@@ -10,6 +12,7 @@ namespace Travel_Planner
         private Location lastClickedDestination;
         private Editor editor;
         private Pin pin;
+        private StackLayout stackLayout;
         public MainPage()
         {
             InitializeComponent();
@@ -20,49 +23,62 @@ namespace Travel_Planner
 
         void OnMapClicked(object sender, MapClickedEventArgs e)
         {
-            
-            
-            locationClick.Text=$"{e.Location.Latitude}, {e.Location.Longitude}";
             lastClickedDestination = new Location(e.Location.Latitude, e.Location.Longitude);
 
-            string label = "no name yet";
-            editor = new Editor { Placeholder = "Enter text", HeightRequest = 250 };
-            editor.TextChanged += OnEditorTextChanged;
-            editor.Completed += OnEditorCompleted;
 
             pin = (new Pin()
             {
                 Location = lastClickedDestination,
-                Label = label,
+                Label = "Unnamed Marker",
                 Address = "lat: "+e.Location.Latitude + " : long: "+e.Location.Longitude
             });
 
             map.Pins.Add(pin);
-            
+            stackLayout = new StackLayout();
 
-            Label label2 = new Label { Text = "lat: "+e.Location.Latitude + " : long: "+e.Location.Longitude };
-            stacken.Add(label2);
-            gridden.Add(editor);
-            
+            editor = new Editor { Placeholder = "Enter text", HeightRequest = 100};
+            editor.TextChanged += OnEditorTextChanged;
+
+            var button = new Button { Text = "Submit" };
+            button.HorizontalOptions = LayoutOptions.End;
+            button.Clicked += EditorButton;
+
+            stacken.Children.Add(stackLayout);
+            stackLayout.Children.Add(editor);
+            stackLayout.Children.Add(button);
+
         }
+
         void OnEditorTextChanged(object sender, TextChangedEventArgs e)
         {
+            map.Pins.Remove(pin);
+            map.Pins.Add(pin);
             string text = ((Editor)sender).Text;
             string oldText = e.OldTextValue;
             string newText = e.NewTextValue;
             string myText = editor.Text;
             pin.Label = newText;
         }
+        
         void OnEditorCompleted(object sender, EventArgs e)
         {
-
             string text = ((Editor)sender).Text;
+
+        }
+        void EditorButton (object sender, EventArgs e)
+        {
+            map.Pins.Remove(pin);
+            map.Pins.Add(pin);
+            string text = editor.Text; 
+            editor.Completed += OnEditorCompleted;
+            pin.Label = text;
             Destination newDestination = new Destination();
             newDestination.coordinates = lastClickedDestination;
             newDestination.Name = text;
             itinerary.addDestination(newDestination);
-            pin.Label = text;
-            gridden.Remove(editor);
+            stackLayout.Children.Clear();
+
+
         }
         private void Button_Clicked(object sender, EventArgs e)
         {
