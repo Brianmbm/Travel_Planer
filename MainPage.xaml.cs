@@ -7,6 +7,9 @@ namespace Travel_Planner
     public partial class MainPage : ContentPage
     {
         private Itinerary itinerary;
+        private Location lastClickedDestination;
+        private Editor editor;
+        private Pin pin;
         public MainPage()
         {
             InitializeComponent();
@@ -20,32 +23,46 @@ namespace Travel_Planner
             
             
             locationClick.Text=$"{e.Location.Latitude}, {e.Location.Longitude}";
-            Location location = new Location(e.Location.Latitude, e.Location.Longitude);
+            lastClickedDestination = new Location(e.Location.Latitude, e.Location.Longitude);
+
             string label = "no name yet";
-            if (editor.Text != null) label = editor.Text;
-            map.Pins.Add(new Pin()
+            editor = new Editor { Placeholder = "Enter text", HeightRequest = 250 };
+            editor.TextChanged += OnEditorTextChanged;
+            editor.Completed += OnEditorCompleted;
+
+            pin = (new Pin()
             {
-                Location = location,
+                Location = lastClickedDestination,
                 Label = label,
                 Address = "lat: "+e.Location.Latitude + " : long: "+e.Location.Longitude
             });
-            Destination newDestination = new Destination();
-            newDestination.coordinates = location;
-            itinerary.addDestination(newDestination);
+
+            map.Pins.Add(pin);
+            
 
             Label label2 = new Label { Text = "lat: "+e.Location.Latitude + " : long: "+e.Location.Longitude };
             stacken.Add(label2);
-
+            gridden.Add(editor);
+            
         }
         void OnEditorTextChanged(object sender, TextChangedEventArgs e)
         {
+            string text = ((Editor)sender).Text;
             string oldText = e.OldTextValue;
             string newText = e.NewTextValue;
             string myText = editor.Text;
+            pin.Label = newText;
         }
         void OnEditorCompleted(object sender, EventArgs e)
         {
+
             string text = ((Editor)sender).Text;
+            Destination newDestination = new Destination();
+            newDestination.coordinates = lastClickedDestination;
+            newDestination.Name = text;
+            itinerary.addDestination(newDestination);
+            pin.Label = text;
+            gridden.Remove(editor);
         }
         private void Button_Clicked(object sender, EventArgs e)
         {

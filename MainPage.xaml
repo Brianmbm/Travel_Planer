@@ -3,17 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travel_Planner.MainPage"
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps">
-    <Grid ColumnDefinitions="*,*"><!--two column grid-->
+    <Grid ColumnDefinitions="*,*" x:Name="gridden"><!--two column grid-->
 
         <maps:Map x:Name="map" MapClicked="OnMapClicked" Grid.ColumnSpan="1" Grid.RowSpan="1" Grid.Column="1" Margin="10" />
-                <AbsoluteLayout HorizontalOptions="Start" VerticalOptions="Start">
-            <Editor x:Name="editor"
-                    Placeholder="Enter Destination Name"
-                    TextChanged="OnEditorTextChanged"
-                    Background="black"
-                    AbsoluteLayout.LayoutBounds="500, -200, 300, 30"
-                    Completed="OnEditorCompleted" />
-        </AbsoluteLayout>
+               
         <VerticalStackLayout x:Name ="stacken" Grid.Column="0">
             <Button Text="Save new trip" Clicked="Button_Clicked"/>
             <Button Text="TestButton" Clicked="Button_Clicked"/>
@@ -43,9 +36,10 @@
                                         BackgroundColor="Orange">
                                         <Label.Text>
                                             <!-- Use Binding to bind to a property of the object-->
-                                            <MultiBinding StringFormat="{}  Longitude = {0}| Latitude = {1}">
+                                            <MultiBinding StringFormat="{}  Longitude = {0}| Latitude = {1} | Namn = {2}">
                                             <Binding Path= "coordinates.Longitude"/>
                                             <Binding Path= "coordinates.Latitude"/>
+                                            <Binding Path="Name" />
                                             </MultiBinding>
                                         </Label.Text>
                                     </Label>
