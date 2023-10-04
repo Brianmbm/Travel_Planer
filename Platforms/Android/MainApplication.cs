@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace Travel_Planer
+namespace Travel_Planner
 {
     [Application]
     public class MainApplication : MauiApplication

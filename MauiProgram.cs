@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui.Maps;
-namespace Travel_Planer
+namespace Travel_Planner
 {
     public static class MauiProgram
     {

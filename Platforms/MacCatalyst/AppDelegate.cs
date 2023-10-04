@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Travel_Planer
+namespace Travel_Planner
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

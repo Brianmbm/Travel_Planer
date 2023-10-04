@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Travel_Planer
+namespace Travel_Planner
 {
     public class Program
     {

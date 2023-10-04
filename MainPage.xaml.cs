@@ -1,8 +1,8 @@
 ﻿
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
-using Travel_Planer.Viewmodels;
-namespace Travel_Planer
+using Travel_Planner.Viewmodels;
+namespace Travel_Planner
 {
     public partial class MainPage : ContentPage
     {

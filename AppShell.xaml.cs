@@ -1,4 +1,4 @@
-﻿namespace Travel_Planer
+﻿namespace Travel_Planner
 {
     public partial class AppShell : Shell
     {

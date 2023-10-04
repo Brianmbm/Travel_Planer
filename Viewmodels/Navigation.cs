@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Travel_Planer.Viewmodels
+namespace Travel_Planner.Viewmodels
 {
     internal class Navigation
     {
