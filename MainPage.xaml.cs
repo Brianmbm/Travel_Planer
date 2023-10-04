@@ -11,6 +11,8 @@ namespace Travel_Planer
         {
             InitializeComponent();
             itinerary= new Itinerary();
+            listView.ItemsSource = itinerary.destinations;//Object list source for the items displayed in the listview. 
+
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -18,8 +20,8 @@ namespace Travel_Planer
             map.Pins.Add(new Pin()
             {
                 Location = new Location(50,6),
-                Label = "doibndbvnd",
-                Address = "svsvpsnv"
+                Label = "testbuttonlabel",
+                Address = "testbuttonaddress"
             });
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location (50, 6), Distance.FromKilometers(10)));
         }

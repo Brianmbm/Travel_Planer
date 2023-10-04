@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,12 +9,12 @@ namespace Travel_Planer.Viewmodels
 {
     internal class Itinerary
     {
-        public List<Destination> destinations;
+        public ObservableCollection<Destination> destinations;
         public List<Navigation> navigations;
 
         public Itinerary()
         {
-            destinations = new List<Destination>();
+            destinations = new ObservableCollection<Destination>();
             navigations = new List<Navigation>();
         }
 
