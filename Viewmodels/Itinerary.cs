@@ -18,13 +18,37 @@ namespace Travel_Planner.Viewmodels
             navigations = new List<Navigation>();
         }
 
-        public void addDestination(Destination add)
+        public void AddDestination(Destination add)
         {
             destinations.Add(add);
+        }
+        public void RemoveDestination(Destination remove)
+        {
+            destinations.Remove(remove);
         }
         public void addNavigation(Navigation add)
         {
             navigations.Add(add);
         }
+        public void RemoveNavigation(Navigation remove)
+        {
+            navigations.Remove(remove);
+        }
+
+
+        public void PrintCalendar()
+        {
+            // TODO: implement
+        }
+        public void Save()
+        {
+            // TODO: implement
+        }
+
+        public void ShowTotalPrice()
+        {
+            // TODO: implement
+        }
+        
     }
 }

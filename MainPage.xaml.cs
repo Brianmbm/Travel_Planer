@@ -75,7 +75,7 @@ namespace Travel_Planner
             Destination newDestination = new Destination();
             newDestination.coordinates = lastClickedDestination;
             newDestination.Name = text;
-            itinerary.addDestination(newDestination);
+            itinerary.AddDestination(newDestination);
             stackLayout.Children.Clear();
 
 

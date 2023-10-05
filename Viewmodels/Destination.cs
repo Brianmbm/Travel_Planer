@@ -13,7 +13,5 @@ namespace Travel_Planner.Viewmodels
         public DateTime date { get; set; }
         public Location coordinates { get; set; }
 
-
-
     }
 }
