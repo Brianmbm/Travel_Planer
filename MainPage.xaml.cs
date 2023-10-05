@@ -20,7 +20,6 @@ namespace Travel_Planner
             InitializeComponent();
             itinerary= new Itinerary();
             listView.ItemsSource = itinerary.destinations;//Object list source for the items displayed in the listview. 
-
         }
 
         void OnMapClicked(object sender, MapClickedEventArgs e)

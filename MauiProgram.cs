@@ -1,11 +1,15 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui.Maps;
-namespace Travel_Planner
-{
+namespace Travel_Planner;
+
+
+#if WINDOWS
     public static class MauiProgram
     {
-        public static MauiApp CreateMauiApp()
+
+    public static MauiApp CreateMauiApp()
         {
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -23,4 +27,27 @@ namespace Travel_Planner
             return builder.Build();
         }
     }
-}
+#elif ANDROID
+
+    public static class MauiProgram
+    {
+        public static MauiApp CreateMauiApp()
+        {
+            var builder = MauiApp.CreateBuilder();
+            builder
+                .UseMauiApp<App>()
+                .ConfigureFonts(fonts =>
+                {
+                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                })
+                .UseMauiMaps();
+
+#if DEBUG
+            builder.Logging.AddDebug();
+#endif
+
+            return builder.Build();
+        }
+    }
+#endif
