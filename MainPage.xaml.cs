@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Maps;
 using Travel_Planner.Viewmodels;
 using static System.Net.Mime.MediaTypeNames;
@@ -13,6 +14,7 @@ namespace Travel_Planner
         private Editor editor;
         private Pin pin;
         private StackLayout stackLayout;
+        private Border border;
         public MainPage()
         {
             InitializeComponent();
@@ -35,18 +37,36 @@ namespace Travel_Planner
 
             map.Pins.Add(pin);
             stackLayout = new StackLayout();
+            stackLayout.Background = Color.Parse("black");
+            stackLayout.Padding = 5;
+            stackLayout.Margin = 10;
 
-            editor = new Editor { Placeholder = "Enter text", HeightRequest = 100};
+            border = new Border();
+            border.HeightRequest = 130;
+            border.WidthRequest = 250;
+            border.Padding = 2;
+            border.Background = Color.Parse("black");
+            border.StrokeThickness = 4;
+            border.Stroke = Color.Parse("purple");
+            border.StrokeShape = new RoundRectangle
+            {
+                CornerRadius = new CornerRadius(25, 25, 25, 25)
+            };
+
+            editor = new Editor { Placeholder = "Enter text"};
             editor.TextChanged += OnEditorTextChanged;
+            editor.BackgroundColor = Color.Parse("black");
+            editor.Margin =2;
 
             var button = new Button { Text = "Submit" };
             button.HorizontalOptions = LayoutOptions.End;
             button.Clicked += EditorButton;
+            button.Padding = 5;
 
-            stacken.Children.Add(stackLayout);
+            border.Content = stackLayout;
+            stacken.Children.Add(border);
             stackLayout.Children.Add(editor);
             stackLayout.Children.Add(button);
-
         }
 
         void OnEditorTextChanged(object sender, TextChangedEventArgs e)
@@ -76,7 +96,7 @@ namespace Travel_Planner
             newDestination.coordinates = lastClickedDestination;
             newDestination.Name = text;
             itinerary.addDestination(newDestination);
-            stackLayout.Children.Clear();
+            stacken.Remove(border);
 
 
         }
