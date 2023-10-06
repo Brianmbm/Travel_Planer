@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travel_Planner.MainPage"
-             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps">
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials">
     <Grid ColumnDefinitions="*,*" x:Name="gridden"><!--two column grid-->
 
-        <maps:Map x:Name="map" MapClicked="OnMapClicked" Grid.ColumnSpan="1" Grid.RowSpan="1" Grid.Column="1" Margin="10" />
-               
+        <maps:Map x:Name="map" MapClicked="OnMapClicked" Grid.ColumnSpan="1" Grid.RowSpan="1" Grid.Column="1" Margin="10" >
+        </maps:Map>
         <VerticalStackLayout x:Name ="stacken" Grid.Column="0">
             <Button Text="Save new trip" Clicked="Button_Clicked"/>
             <Button Text="TestButton" Clicked="Button_Clicked"/>
