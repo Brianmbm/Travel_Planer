@@ -12,9 +12,10 @@ namespace Travel_Planner
         private Itinerary itinerary;
         private Location lastClickedDestination;
         private Editor editor;
-        private Pin pin;
+        private Pin currentPin;
         private StackLayout stackLayout;
         private Border border;
+        private Boolean hasCreateDestinationPopup = false;
         public MainPage()
         {
             InitializeComponent();
@@ -24,59 +25,73 @@ namespace Travel_Planner
 
         void OnMapClicked(object sender, MapClickedEventArgs e)
         {
-            lastClickedDestination = new Location(e.Location.Latitude, e.Location.Longitude);
 
-
-            pin = (new Pin()
+            if (!hasCreateDestinationPopup)
             {
-                Location = lastClickedDestination,
-                Label = "Unnamed Marker",
-                Address = "lat: "+e.Location.Latitude + " : long: "+e.Location.Longitude
-            });
+                lastClickedDestination = new Location(e.Location.Latitude, e.Location.Longitude);
+                currentPin = new Pin()
+                {
+                    Location = lastClickedDestination,
+                    Label = "Unnamed Marker",
+                    Address = "lat: " + e.Location.Latitude + " : long: " + e.Location.Longitude
+                };
+                map.Pins.Add(currentPin);
+                CreateEnterNamePopup();
+            }
 
-            map.Pins.Add(pin);
+        }
+        private void CreateEnterNamePopup()
+        {
             stackLayout = new StackLayout();
-            stackLayout.Background = Color.Parse("black");
+            stackLayout.Background = Color.Parse("white");
             stackLayout.Padding = 5;
             stackLayout.Margin = 10;
 
+
             border = new Border();
-            border.HeightRequest = 130;
-            border.WidthRequest = 250;
+            border.HeightRequest = 180;
+            border.VerticalOptions = LayoutOptions.Center;
+            border.HorizontalOptions = LayoutOptions.Center;
+            border.WidthRequest = 220;
             border.Padding = 2;
-            border.Background = Color.Parse("black");
+            border.Background = Color.Parse("white");
             border.StrokeThickness = 4;
-            border.Stroke = Color.Parse("purple");
+            border.Stroke = Color.Parse("black");
             border.StrokeShape = new RoundRectangle
             {
                 CornerRadius = new CornerRadius(25, 25, 25, 25)
             };
 
-            editor = new Editor { Placeholder = "Enter text"};
+            editor = new Editor { Placeholder = "Enter Destination Name" };
             editor.TextChanged += OnEditorTextChanged;
-            editor.BackgroundColor = Color.Parse("black");
-            editor.Margin =2;
+            editor.BackgroundColor = Color.Parse("white");
+            editor.Margin = 2;
 
-            var button = new Button { Text = "Submit" };
-            button.HorizontalOptions = LayoutOptions.End;
-            button.Clicked += EditorButton;
-            button.Padding = 5;
+            var addButton = new Button { Text = "Add" };
+            addButton.HorizontalOptions = LayoutOptions.End;
+            addButton.Clicked += CreateDestinationButton;
+            addButton.Padding = 5;
+
+            var cancelButton = new Button { Text = "Cancel" };
+            cancelButton.HorizontalOptions = LayoutOptions.Start;
+            cancelButton.Clicked += CancelCreateDestinationButton;
+            cancelButton.Padding = 5;
 
             border.Content = stackLayout;
-            stacken.Children.Add(border);
+            gridden.Add(border, 1,0);
             stackLayout.Children.Add(editor);
-            stackLayout.Children.Add(button);
-        }
+            stackLayout.Children.Add(cancelButton);
+            stackLayout.Children.Add(addButton);
 
+            hasCreateDestinationPopup = true;
+        }
         void OnEditorTextChanged(object sender, TextChangedEventArgs e)
         {
-            map.Pins.Remove(pin);
-            map.Pins.Add(pin);
             string text = ((Editor)sender).Text;
             string oldText = e.OldTextValue;
             string newText = e.NewTextValue;
             string myText = editor.Text;
-            pin.Label = newText;
+            currentPin.Label = newText;
         }
         
         void OnEditorCompleted(object sender, EventArgs e)
@@ -84,30 +99,39 @@ namespace Travel_Planner
             string text = ((Editor)sender).Text;
 
         }
-        void EditorButton (object sender, EventArgs e)
+        void CancelCreateDestinationButton(object sender, EventArgs e)
         {
-            map.Pins.Remove(pin);
-            map.Pins.Add(pin);
+
+
+            while (map.Pins.Remove(currentPin))
+            {
+
+                hasCreateDestinationPopup = false;
+            }
+            gridden.Remove(border);
+
+            hasCreateDestinationPopup = false;
+        }
+        void CreateDestinationButton (object sender, EventArgs e)
+        {
+            
+
             string text = editor.Text; 
             editor.Completed += OnEditorCompleted;
-            pin.Label = text;
+            currentPin.Label = text;
             Destination newDestination = new Destination();
             newDestination.coordinates = lastClickedDestination;
             newDestination.Name = text;
-            itinerary.addDestination(newDestination);
-            stacken.Remove(border);
+            currentPin.Label = text;
 
+            itinerary.AddDestination(newDestination);
+            gridden.Remove(border);
 
+            hasCreateDestinationPopup = false;
         }
         private void Button_Clicked(object sender, EventArgs e)
         {
-            map.Pins.Add(new Pin()
-            {
-                Location = new Location(50, 6),
-                Label = "testbuttonlabel",
-                Address = "testbuttonaddress"
-            });
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(50, 6), Distance.FromKilometers(10)));
+
         }
     }
 }
