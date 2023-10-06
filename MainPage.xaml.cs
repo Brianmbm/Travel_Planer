@@ -21,6 +21,8 @@ namespace Travel_Planner
             InitializeComponent();
             itinerary= new Itinerary();
             listView.ItemsSource = itinerary.destinations;//Object list source for the items displayed in the listview. 
+            PolyLine();
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(47.6368678, -122.137305), Distance.FromKilometers(10)));
         }
 
         void OnMapClicked(object sender, MapClickedEventArgs e)
@@ -132,6 +134,21 @@ namespace Travel_Planner
         private void Button_Clicked(object sender, EventArgs e)
         {
 
+        }
+
+        private void PolyLine()
+        {
+            var polyline1 = new Microsoft.Maui.Controls.Maps.Polyline
+            {
+                StrokeColor = Colors.Red,
+                StrokeWidth = 10,
+                Geopath =
+                {
+                    new Location(47.6368678, -122.137305),
+                    new Location(47.6368894, -122.134655)
+                }
+            };
+            map.MapElements.Add(polyline1);
         }
     }
 }
