@@ -131,7 +131,7 @@ namespace Travel_Planner
             Destination newDestination = new Destination();
             newDestination.coordinates = lastClickedDestination;
             newDestination.Name = text;
-            newDestination.price = Convert.ToInt32(priceInputField.Text);
+            newDestination.price = Convert.ToInt32(priceInputField.Text); // TODO: add check for valid number
             currentPin.Label = text;
 
             itinerary.AddDestination(newDestination);
