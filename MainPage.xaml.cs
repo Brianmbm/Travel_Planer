@@ -11,7 +11,8 @@ namespace Travel_Planner
     {
         private Itinerary itinerary;
         private Location lastClickedDestination;
-        private Editor editor;
+        private Editor nameInputField;
+        private Editor priceInputField;
         private Pin currentPin;
         private StackLayout stackLayout;
         private Border border;
@@ -38,11 +39,11 @@ namespace Travel_Planner
                     Address = "lat: " + e.Location.Latitude + " : long: " + e.Location.Longitude
                 };
                 map.Pins.Add(currentPin);
-                CreateEnterNamePopup();
+                CreateAddDestinationPopup();
             }
 
         }
-        private void CreateEnterNamePopup()
+        private void CreateAddDestinationPopup()
         {
             stackLayout = new StackLayout();
             stackLayout.Background = Color.Parse("white");
@@ -51,7 +52,7 @@ namespace Travel_Planner
 
 
             border = new Border();
-            border.HeightRequest = 180;
+            border.HeightRequest = 250;
             border.VerticalOptions = LayoutOptions.Center;
             border.HorizontalOptions = LayoutOptions.Center;
             border.WidthRequest = 220;
@@ -64,10 +65,15 @@ namespace Travel_Planner
                 CornerRadius = new CornerRadius(25, 25, 25, 25)
             };
 
-            editor = new Editor { Placeholder = "Enter Destination Name" };
-            editor.TextChanged += OnEditorTextChanged;
-            editor.BackgroundColor = Color.Parse("white");
-            editor.Margin = 2;
+            nameInputField = new Editor { Placeholder = "Enter Destination Name" };
+            nameInputField.TextChanged += OnEditorTextChanged;
+            nameInputField.BackgroundColor = Color.Parse("white");
+            nameInputField.Margin = 2;
+
+            priceInputField = new Editor { Placeholder = "Enter Price" };
+            priceInputField.TextChanged += OnEditorTextChanged;
+            priceInputField.BackgroundColor = Color.Parse("white");
+            priceInputField.Margin = 2;
 
             var addButton = new Button { Text = "Add" };
             addButton.HorizontalOptions = LayoutOptions.End;
@@ -81,7 +87,8 @@ namespace Travel_Planner
 
             border.Content = stackLayout;
             gridden.Add(border, 1,0);
-            stackLayout.Children.Add(editor);
+            stackLayout.Children.Add(nameInputField);
+            stackLayout.Children.Add(priceInputField);
             stackLayout.Children.Add(cancelButton);
             stackLayout.Children.Add(addButton);
 
@@ -92,7 +99,7 @@ namespace Travel_Planner
             string text = ((Editor)sender).Text;
             string oldText = e.OldTextValue;
             string newText = e.NewTextValue;
-            string myText = editor.Text;
+            string myText = nameInputField.Text;
             currentPin.Label = newText;
         }
         
@@ -118,12 +125,13 @@ namespace Travel_Planner
         {
             
 
-            string text = editor.Text; 
-            editor.Completed += OnEditorCompleted;
+            string text = nameInputField.Text; 
+            nameInputField.Completed += OnEditorCompleted;
             currentPin.Label = text;
             Destination newDestination = new Destination();
             newDestination.coordinates = lastClickedDestination;
             newDestination.Name = text;
+            newDestination.price = Convert.ToInt32(priceInputField.Text);
             currentPin.Label = text;
 
             itinerary.AddDestination(newDestination);
