@@ -4,13 +4,17 @@
              x:Class="Travel_Planner.MainPage"
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
               xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials">
-    <Grid ColumnDefinitions="*,*" x:Name="gridden"><!--two column grid-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text = "Save new trip"
+                         Clicked="Button_Clicked"/>
+        <ToolbarItem Text = "TestButton"
+                         Clicked="Button_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <Grid ColumnDefinitions="*" x:Name="gridden"><!--two column grid-->
 
         <maps:Map x:Name="map" MapClicked="OnMapClicked" Grid.ColumnSpan="1" Grid.RowSpan="1" Grid.Column="1" Margin="10" >
         </maps:Map>
         <VerticalStackLayout x:Name ="stacken" Grid.Column="0">
-            <Button Text="Save new trip" Clicked="Button_Clicked"/>
-            <Button Text="TestButton" Clicked="Button_Clicked"/>
             <ListView x:Name="listView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
