@@ -5,9 +5,7 @@
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
               xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text = "Save new trip"
-                         Clicked="Button_Clicked"/>
-        <ToolbarItem Text = "TestButton"
+        <ToolbarItem Text = "Save trip"
                          Clicked="Button_Clicked"/>
     </ContentPage.ToolbarItems>
     <Grid ColumnDefinitions="*,*,*" x:Name="gridden"><!--two column grid-->
