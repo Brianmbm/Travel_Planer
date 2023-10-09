@@ -23,7 +23,6 @@ namespace Travel_Planner
             InitializeComponent();
             itinerary= new Itinerary();
             listView.ItemsSource = itinerary.destinations;//Object list source for the items displayed in the listview. 
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(47.6368678, -122.137305), Distance.FromKilometers(10)));
         }
 
         void OnMapClicked(object sender, MapClickedEventArgs e)
@@ -136,7 +135,7 @@ namespace Travel_Planner
 
             itinerary.AddDestination(newDestination);
             gridden.Remove(border);
-            PolyLine();
+            AddPolyLineBetweenLastTwoDestinations();
             hasCreateDestinationPopup = false;
         }
         private void Button_Clicked(object sender, EventArgs e)
@@ -144,7 +143,7 @@ namespace Travel_Planner
 
         }
 
-        private void PolyLine()
+        private void AddPolyLineBetweenLastTwoDestinations()
         {
             if (itinerary.destinations.Count > 1) 
             {
@@ -162,6 +161,11 @@ namespace Travel_Planner
             };
             map.MapElements.Add(polyline1);
             }
+        }
+        void OnDestinationListClick(object sender, SelectedItemChangedEventArgs e)
+        {
+            Destination selectedDestination = itinerary.destinations[e.SelectedItemIndex];
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(selectedDestination.coordinates, Distance.FromKilometers(100)));
         }
     }
 }
