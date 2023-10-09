@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui.Maps;
+using Syncfusion.Maui.Core.Hosting;
+
 namespace Travel_Planner;
 
 
@@ -34,6 +36,7 @@ namespace Travel_Planner;
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+            builder.ConfigureSyncfusionCore();
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>

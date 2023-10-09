@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travel_Planner.MainPage"
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
-              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials">
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text = "Save trip"
                          Clicked="Button_Clicked"/>
@@ -39,7 +39,7 @@
                                         BackgroundColor="Orange">
                                         <Label.Text>
                                             <!-- Use Binding to bind to a property of the object-->
-                                            <MultiBinding StringFormat="{} {0}">
+                                            <MultiBinding StringFormat="{} {0} {1}">
                                                 <Binding Path="Name" />
                                             </MultiBinding>
                                         </Label.Text>

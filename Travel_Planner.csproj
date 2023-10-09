@@ -51,9 +51,13 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui.Maps" Version="1.0.4" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Syncfusion.Maui.Calendar" Version="23.1.39" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="CalendarPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SavedTrips.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -17,6 +17,7 @@ namespace Travel_Planner
         private StackLayout stackLayout;
         private Border border;
         private Boolean hasCreateDestinationPopup = false;
+        
 
         public MainPage()
         {
@@ -34,7 +35,7 @@ namespace Travel_Planner
                 currentPin = new Pin()
                 {
                     Location = lastClickedDestination,
-                    Label = "Unnamed Marker",
+                    Label = "Unnamed Marker", 
                     Address = "lat: " + e.Location.Latitude + " : long: " + e.Location.Longitude
                 };
                 map.Pins.Add(currentPin);
