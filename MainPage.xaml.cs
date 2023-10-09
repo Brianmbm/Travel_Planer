@@ -17,12 +17,12 @@ namespace Travel_Planner
         private StackLayout stackLayout;
         private Border border;
         private Boolean hasCreateDestinationPopup = false;
+
         public MainPage()
         {
             InitializeComponent();
             itinerary= new Itinerary();
             listView.ItemsSource = itinerary.destinations;//Object list source for the items displayed in the listview. 
-            PolyLine();
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(47.6368678, -122.137305), Distance.FromKilometers(10)));
         }
 
@@ -136,7 +136,7 @@ namespace Travel_Planner
 
             itinerary.AddDestination(newDestination);
             gridden.Remove(border);
-
+            PolyLine();
             hasCreateDestinationPopup = false;
         }
         private void Button_Clicked(object sender, EventArgs e)
@@ -146,17 +146,22 @@ namespace Travel_Planner
 
         private void PolyLine()
         {
+            if (itinerary.destinations.Count > 1) 
+            {
+                int lastDestination = itinerary.destinations.Count-2;
+                int newDestination = itinerary.destinations.Count-1;
             var polyline1 = new Microsoft.Maui.Controls.Maps.Polyline
             {
                 StrokeColor = Colors.Red,
                 StrokeWidth = 10,
                 Geopath =
                 {
-                    new Location(47.6368678, -122.137305),
-                    new Location(47.6368894, -122.134655)
+                    itinerary.destinations[lastDestination].coordinates,
+                    itinerary.destinations[newDestination].coordinates
                 }
             };
             map.MapElements.Add(polyline1);
+            }
         }
     }
 }
