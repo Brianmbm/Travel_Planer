@@ -30,6 +30,10 @@
             Title="Saved Trips"
             ContentTemplate="{DataTemplate local:SavedTrips}"
             Route="SavedTrips" />
+        <ShellContent
+            Title="Calendar"
+            ContentTemplate="{DataTemplate local:CalendarPage}"
+            Route="CalendarPage" />
     </FlyoutItem>
 
 </Shell>
