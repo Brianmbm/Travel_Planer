@@ -3,6 +3,7 @@ using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Maps;
 using Syncfusion.Maui.Calendar;
+using System.Diagnostics;
 using Travel_Planner.Viewmodels;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -141,6 +142,7 @@ namespace Travel_Planner
             newDestination.coordinates = lastClickedDestination;
             newDestination.Name = text;
             newDestination.price = Convert.ToInt32(priceInputField.Text); // TODO: add check for valid number
+            newDestination.date = Calendar.DisplayDate;
             currentPin.Label = text;
 
             itinerary.AddDestination(newDestination);
@@ -179,12 +181,21 @@ namespace Travel_Planner
         }
 
         void PopUpCalendar(object sender, EventArgs e)
-        { 
+        {
             this.Calendar = new SfCalendar();
-            this.Content = Calendar;
+            Calendar.Background= new SolidColorBrush(Colors.White);
+            Calendar.HorizontalOptions = LayoutOptions.Fill;
+            Calendar.VerticalOptions = LayoutOptions.Fill;
+            Calendar.ActionButtonClicked += OnActionButtonClicked;
+            gridden.Add(Calendar, 0, 0);
+            gridden.SetColumnSpan(Calendar, 3);
             this.Calendar.ShowActionButtons = true;
             
 
+        }
+        private void OnActionButtonClicked(object sender, CalendarSubmittedEventArgs e)
+        {
+            gridden.Remove(Calendar);
         }
     }
 }
