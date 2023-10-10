@@ -148,8 +148,25 @@ namespace Travel_Planner
             Destination newDestination = new Destination();
             newDestination.coordinates = lastClickedDestination;
             newDestination.Name = text;
-            newDestination.price = Convert.ToInt32(priceInputField.Text); // TODO: add check for valid number
-            newDestination.date = Calendar.DisplayDate;
+
+            try
+            {
+                newDestination.price = Convert.ToInt32(priceInputField.Text);
+            }
+            catch (FormatException eception)
+            {
+                newDestination.price = 0;
+            }
+
+            try
+            {
+                newDestination.date = Calendar.DisplayDate;
+            }
+            catch (NullReferenceException exception)
+            {
+                newDestination.date = DateTime.Now;
+            }
+            
             currentPin.Label = text;
 
             itinerary.AddDestination(newDestination);
