@@ -39,9 +39,7 @@
                                         BackgroundColor="Orange">
                                         <Label.Text>
                                             <!-- Use Binding to bind to a property of the object-->
-                                            <MultiBinding StringFormat="{} {0} {1}">
-                                                <Binding Path="Name" />
-                                            </MultiBinding>
+                                            <Binding Path="Name" />
                                         </Label.Text>
                                     </Label>
                                 </Border>
