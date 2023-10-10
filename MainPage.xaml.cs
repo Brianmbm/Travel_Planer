@@ -55,7 +55,7 @@ namespace Travel_Planner
 
 
             border = new Border();
-            border.HeightRequest = 250;
+            border.HeightRequest = 240;
             border.VerticalOptions = LayoutOptions.Center;
             border.HorizontalOptions = LayoutOptions.Center;
             border.WidthRequest = 220;
@@ -79,27 +79,34 @@ namespace Travel_Planner
             priceInputField.Margin = 2;
 
             var dateButton = new Button { Text = "Date" };
-            dateButton.HorizontalOptions = LayoutOptions.End;
+            dateButton.HorizontalOptions = LayoutOptions.Start;
             dateButton.Clicked += PopUpCalendar;
             dateButton.Padding = 5;
+            dateButton.Margin = 2;
 
             var addButton = new Button { Text = "Add" };
+            addButton.Margin = 2;
             addButton.HorizontalOptions = LayoutOptions.End;
             addButton.Clicked += CreateDestinationButton;
             addButton.Padding = 5;
 
-            var cancelButton = new Button { Text = "Cancel" };
-            cancelButton.HorizontalOptions = LayoutOptions.Start;
+            var cancelButton = new Button { Text = "Cancel"};
+            cancelButton.Margin = 2;  
+            cancelButton.HorizontalOptions = LayoutOptions.End;
             cancelButton.Clicked += CancelCreateDestinationButton;
             cancelButton.Padding = 5;
+
+            var buttonLayout = new HorizontalStackLayout();
+            buttonLayout.HorizontalOptions = LayoutOptions.End;
 
             border.Content = stackLayout;
             gridden.Add(border, 1,0);
             stackLayout.Children.Add(nameInputField);
-            stackLayout.Children.Add(priceInputField);
+            stackLayout.Children.Add(priceInputField);            
             stackLayout.Children.Add(dateButton);
-            stackLayout.Children.Add(cancelButton);
-            stackLayout.Children.Add(addButton);
+            stackLayout.Children.Add(buttonLayout);
+            buttonLayout.Children.Add(cancelButton);
+            buttonLayout.Children.Add(addButton);
 
 
             hasCreateDestinationPopup = true;
