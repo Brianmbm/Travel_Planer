@@ -4,8 +4,15 @@
              x:Class="Travel_Planner.CalendarPage"
              Title="Calendar"
              xmlns:calendar="clr-namespace:Syncfusion.Maui.Calendar;assembly=Syncfusion.Maui.Calendar">
-    <VerticalStackLayout>
-        <Label Text="Calendar" />
-        
-    </VerticalStackLayout>
+    <Grid ColumnDefinitions="*,*">
+        <VerticalStackLayout Grid.Column="0">
+            <calendar:SfCalendar  x:Name="Calendar" ShowActionButtons="True" ShowTodayButton="True">
+                <calendar:SfCalendar.MonthView>
+                    <calendar:CalendarMonthView FirstDayOfWeek="Monday"/>
+                </calendar:SfCalendar.MonthView>
+            </calendar:SfCalendar>
+        </VerticalStackLayout>
+     
+    </Grid>
+
 </ContentPage>

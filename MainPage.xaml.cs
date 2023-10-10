@@ -2,6 +2,7 @@
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Maps;
+using Syncfusion.Maui.Calendar;
 using Travel_Planner.Viewmodels;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -17,6 +18,7 @@ namespace Travel_Planner
         private StackLayout stackLayout;
         private Border border;
         private Boolean hasCreateDestinationPopup = false;
+        private SfCalendar Calendar;
         
 
         public MainPage()
@@ -75,6 +77,11 @@ namespace Travel_Planner
             priceInputField.BackgroundColor = Color.Parse("white");
             priceInputField.Margin = 2;
 
+            var dateButton = new Button { Text = "Date" };
+            dateButton.HorizontalOptions = LayoutOptions.End;
+            dateButton.Clicked += PopUpCalendar;
+            dateButton.Padding = 5;
+
             var addButton = new Button { Text = "Add" };
             addButton.HorizontalOptions = LayoutOptions.End;
             addButton.Clicked += CreateDestinationButton;
@@ -89,8 +96,10 @@ namespace Travel_Planner
             gridden.Add(border, 1,0);
             stackLayout.Children.Add(nameInputField);
             stackLayout.Children.Add(priceInputField);
+            stackLayout.Children.Add(dateButton);
             stackLayout.Children.Add(cancelButton);
             stackLayout.Children.Add(addButton);
+
 
             hasCreateDestinationPopup = true;
         }
@@ -167,6 +176,15 @@ namespace Travel_Planner
         {
             Destination selectedDestination = itinerary.destinations[e.SelectedItemIndex];
             map.MoveToRegion(MapSpan.FromCenterAndRadius(selectedDestination.coordinates, Distance.FromKilometers(100)));
+        }
+
+        void PopUpCalendar(object sender, EventArgs e)
+        { 
+            this.Calendar = new SfCalendar();
+            this.Content = Calendar;
+            this.Calendar.ShowActionButtons = true;
+            
+
         }
     }
 }
