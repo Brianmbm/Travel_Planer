@@ -13,6 +13,7 @@ namespace Travel_Planner;
         {
 
             var builder = MauiApp.CreateBuilder();
+            builder.ConfigureSyncfusionCore();
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>

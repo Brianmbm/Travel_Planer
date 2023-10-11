@@ -21,6 +21,16 @@ namespace Travel_Planner.Viewmodels
         public void AddDestination(Destination add)
         {
             destinations.Add(add);
+
+            for (int i = 0; i<destinations.Count; i++)
+            {
+                if (DateTime.Compare(destinations[i].date, destinations.Last().date) > 0)
+                {
+                    destinations.Move(destinations.Count-1, i);
+                    break;
+                }
+            }
+
         }
         public void RemoveDestination(Destination remove)
         {

@@ -20,7 +20,8 @@ namespace Travel_Planner
         private Border border;
         private Boolean hasCreateDestinationPopup = false;
         private SfCalendar Calendar;
-        
+        private Destination selectedDestination;
+        private List<Microsoft.Maui.Controls.Maps.Polyline> polyLines = new List<Microsoft.Maui.Controls.Maps.Polyline>();  
 
         public MainPage()
         {
@@ -161,7 +162,7 @@ namespace Travel_Planner
 
             try
             {
-                newDestination.date = Calendar.DisplayDate;
+                newDestination.date = (DateTime)Calendar.SelectedDate;
             }
             catch (NullReferenceException exception)
             {
@@ -172,36 +173,45 @@ namespace Travel_Planner
 
             itinerary.AddDestination(newDestination);
             gridden.Remove(border);
-            AddPolyLineBetweenLastTwoDestinations();
+            RemoveAllPolyLines();
+            AddPolyLineBetweenAllDestinations();
             hasCreateDestinationPopup = false;
         }
         private void Button_Clicked(object sender, EventArgs e)
         {
-
+            
         }
 
-        private void AddPolyLineBetweenLastTwoDestinations()
+        private void AddPolyLineBetweenAllDestinations()
         {
-            if (itinerary.destinations.Count > 1) 
+            for (int i = 1; i<itinerary.destinations.Count; i++)
             {
-                int lastDestination = itinerary.destinations.Count-2;
-                int newDestination = itinerary.destinations.Count-1;
-            var polyline1 = new Microsoft.Maui.Controls.Maps.Polyline
-            {
-                StrokeColor = Colors.Red,
-                StrokeWidth = 10,
-                Geopath =
+                var polyline1 = new Microsoft.Maui.Controls.Maps.Polyline
                 {
-                    itinerary.destinations[lastDestination].coordinates,
-                    itinerary.destinations[newDestination].coordinates
+                    StrokeColor = Colors.Red,
+                    StrokeWidth = 10,
+                    Geopath =
+                {
+                    itinerary.destinations[i-1].coordinates,
+                    itinerary.destinations[i].coordinates
                 }
-            };
-            map.MapElements.Add(polyline1);
+                };
+                map.MapElements.Add(polyline1);
+                polyLines.Add(polyline1);
+            }
+
+
+        }
+        private void RemoveAllPolyLines()
+        {
+            foreach (Microsoft.Maui.Controls.Maps.Polyline polyline in polyLines)
+            {
+                map.MapElements.Remove(polyline);
             }
         }
         void OnDestinationListClick(object sender, SelectedItemChangedEventArgs e)
         {
-            Destination selectedDestination = itinerary.destinations[e.SelectedItemIndex];
+            selectedDestination = itinerary.destinations[e.SelectedItemIndex];
             map.MoveToRegion(MapSpan.FromCenterAndRadius(selectedDestination.coordinates, Distance.FromKilometers(100)));
         }
 
@@ -221,6 +231,13 @@ namespace Travel_Planner
         private void OnActionButtonClicked(object sender, CalendarSubmittedEventArgs e)
         {
             gridden.Remove(Calendar);
+        }
+        private void RemoveSelectedDestination(object sender, EventArgs args)
+        {
+            map.Pins.Remove(selectedDestination.pin);
+            itinerary.destinations.Remove(selectedDestination);
+            RemoveAllPolyLines();
+            AddPolyLineBetweenAllDestinations();
         }
     }
 }
