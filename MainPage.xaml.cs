@@ -148,6 +148,7 @@ namespace Travel_Planner
             Destination newDestination = new Destination();
             newDestination.coordinates = lastClickedDestination;
             newDestination.Name = text;
+            newDestination.pin = currentPin;
 
             try
             {

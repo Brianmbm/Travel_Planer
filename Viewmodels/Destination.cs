@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maui.Controls.Maps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace Travel_Planner.Viewmodels
         public int price { get; set; }
         public DateTime date { get; set; }
         public Location coordinates { get; set; }
+        public Pin pin { get; set; }
 
     }
 }

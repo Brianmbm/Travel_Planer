@@ -15,38 +15,14 @@
 
         <maps:Map x:Name="map" MapClicked="OnMapClicked" Grid.ColumnSpan="3" Grid.RowSpan="1" Grid.Column="0" Margin="0" >
         </maps:Map>
-            <VerticalStackLayout x:Name ="stacken" Grid.Column="0">
-            <ListView x:Name="listView" SelectionMode="Single" ItemSelected="OnDestinationListClick" >
+            <VerticalStackLayout x:Name ="stacken" Grid.Column="0" Grid.ColumnSpan="2">
+            <ListView x:Name="listView" SelectionMode="Single" ItemSelected="OnDestinationListClick">
+
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Grid Padding="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Border Stroke="orange"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 50,20,20,50"
-                                    Background= "orange"
-                                    Padding="16,8"
-                                    HorizontalOptions="Center">
-                                    <Label Grid.Column="1"
-                                        FontAttributes="Bold"
-                                        TextColor="white"
-                                        BackgroundColor="Orange">
-                                        <Label.Text>
-                                            <!-- Use Binding to bind to a property of the object-->
-                                            <Binding Path="Name" />
-                                        </Label.Text>
-                                    </Label>
-                                </Border>
-                            </Grid>
-                        </ViewCell>
+                        <TextCell Text="{Binding Name}"
+                                   Detail="{Binding date}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
