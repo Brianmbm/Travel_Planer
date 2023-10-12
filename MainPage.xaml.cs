@@ -29,7 +29,9 @@ namespace Travel_Planner
             itinerary= new Itinerary();
             listView.ItemsSource = itinerary.destinations;//Object list source for the items displayed in the listview. 
         }
-
+        /// <summary>
+        /// Class <c>OnMapClicked</c> tries to creates a popup window for user input about a new destination if there is not already one active.
+        /// </summary>
         void OnMapClicked(object sender, MapClickedEventArgs e)
         {
 
@@ -47,6 +49,9 @@ namespace Travel_Planner
             }
 
         }
+        /// <summary>
+        /// Class <c>CreateAddDestinationPopup</c> Creates a popup window for user input about a new destination.
+        /// </summary>
         private void CreateAddDestinationPopup()
         {
             stackLayout = new StackLayout();
@@ -112,6 +117,9 @@ namespace Travel_Planner
 
             hasCreateDestinationPopup = true;
         }
+        /// <summary>
+        /// Class <c>OnEditorTextChanged</c> updates the label of the current pin from the editor.
+        /// </summary>
         void OnEditorTextChanged(object sender, TextChangedEventArgs e)
         {
             string text = ((Editor)sender).Text;
@@ -120,12 +128,17 @@ namespace Travel_Planner
             string myText = nameInputField.Text;
             currentPin.Label = newText;
         }
-        
+        /// <summary>
+        /// Class <c>OnEditorCompleted</c> PLACEHOLDER METHOD
+        /// </summary>
         void OnEditorCompleted(object sender, EventArgs e)
         {
             string text = ((Editor)sender).Text;
 
         }
+        /// <summary>
+        /// Class <c>CancelCreateDestinationButton</c> Cancels the current input window for creating a new destination.
+        /// </summary>
         void CancelCreateDestinationButton(object sender, EventArgs e)
         {
 
@@ -139,6 +152,9 @@ namespace Travel_Planner
 
             hasCreateDestinationPopup = false;
         }
+        /// <summary>
+        /// Class <c>CreateDestinationButton</c> Creates a new destination with information from the user inpit window. This method also updates all the polylines on the map.
+        /// </summary>
         void CreateDestinationButton (object sender, EventArgs e)
         {
             
@@ -184,9 +200,11 @@ namespace Travel_Planner
         }
         private void Button_Clicked(object sender, EventArgs e)
         {
-            
+            //TODO: implement
         }
-
+        /// <summary>
+        /// Class <c>AddPolyLineBetweenAllDestinations</c> draws new polylines between all destinations on the map. Also removes all old ones.
+        /// </summary>
         private void AddPolyLineBetweenAllDestinations()
         {
             for (int i = 1; i<itinerary.destinations.Count; i++)
@@ -207,6 +225,9 @@ namespace Travel_Planner
 
 
         }
+        /// <summary>
+        /// Class <c>RemoveAllPolyLines</c> Removes all the polylines on the map.
+        /// </summary>
         private void RemoveAllPolyLines()
         {
             foreach (Microsoft.Maui.Controls.Maps.Polyline polyline in polyLines)
@@ -214,12 +235,17 @@ namespace Travel_Planner
                 map.MapElements.Remove(polyline);
             }
         }
+        /// <summary>
+        /// Class <c>OnDestinationListClick</c> moves the map view to the selected destination in the destination list.
+        /// </summary>
         void OnDestinationListClick(object sender, SelectedItemChangedEventArgs e)
         {
             selectedDestination = itinerary.destinations[e.SelectedItemIndex];
             map.MoveToRegion(MapSpan.FromCenterAndRadius(selectedDestination.coordinates, Distance.FromKilometers(100)));
         }
-
+        /// <summary>
+        /// Class <c>OnDestinationListClick</c> creates a calendar window for date input from the user.
+        /// </summary>
         void PopUpCalendar(object sender, EventArgs e)
         {
             this.Calendar = new SfCalendar();
@@ -233,10 +259,16 @@ namespace Travel_Planner
             
 
         }
+        /// <summary>
+        /// Class <c>OnActionButtonClicked</c> closes the calendar.
+        /// </summary>
         private void OnActionButtonClicked(object sender, CalendarSubmittedEventArgs e)
         {
             gridden.Remove(Calendar);
         }
+        /// <summary>
+        /// Class <c>OnDestinationListClick</c> removes the currently selected destination in the destination list. Also updates all polylines accordingly
+        /// </summary>
         private void RemoveSelectedDestination(object sender, EventArgs args)
         {
             map.Pins.Remove(selectedDestination.pin);

@@ -17,7 +17,9 @@ namespace Travel_Planner.Viewmodels
             destinations = new ObservableCollection<Destination>();
             navigations = new List<Navigation>();
         }
-
+        /// <summary>
+        /// Class <c>AddDestination</c> Adds a destination to the collection and makes sure the collection stays sorted by date.
+        /// </summary>
         public void AddDestination(Destination add)
         {
             destinations.Add(add);
@@ -32,14 +34,23 @@ namespace Travel_Planner.Viewmodels
             }
 
         }
+        /// <summary>
+        /// Class <c>RemoveDestination</c> removes a given destination from the collection
+        /// </summary>
         public void RemoveDestination(Destination remove)
         {
             destinations.Remove(remove);
         }
+        /// <summary>
+        /// Class <c>addNavigation</c> adds a given Navigation from the collection
+        /// </summary>
         public void addNavigation(Navigation add)
         {
             navigations.Add(add);
         }
+        /// <summary>
+        /// Class <c>RemoveNavigation</c> removes a given Navigation from the collection
+        /// </summary>
         public void RemoveNavigation(Navigation remove)
         {
             navigations.Remove(remove);
