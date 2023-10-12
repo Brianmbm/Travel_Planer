@@ -11,6 +11,7 @@ namespace Travel_Planner.Viewmodels
     {
         public string Name { get; set; }
         public int price { get; set; }
+        public string dateString { get; set; }
         public DateTime date { get; set; }
         public Location coordinates { get; set; }
         public Pin pin { get; set; }

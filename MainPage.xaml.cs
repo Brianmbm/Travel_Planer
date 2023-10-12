@@ -155,17 +155,22 @@ namespace Travel_Planner
             {
                 newDestination.price = Convert.ToInt32(priceInputField.Text);
             }
-            catch (FormatException eception)
+            catch (FormatException exception)
             {
                 newDestination.price = 0;
             }
 
             try
             {
-                newDestination.date = (DateTime)Calendar.SelectedDate;
+                DateTime selectedDateTime = ((DateTime)Calendar.SelectedDate);
+                newDestination.dateString = selectedDateTime.ToString("MM/dd/yyyy");
+                newDestination.date = (DateTime) Calendar.SelectedDate;
+                
             }
             catch (NullReferenceException exception)
             {
+                
+                newDestination.dateString = DateTime.Now.ToString("MM/dd/yyyy");
                 newDestination.date = DateTime.Now;
             }
             

@@ -25,10 +25,16 @@
                             <Grid Padding="0" ColumnDefinitions="*,64" RowDefinitions="*,*">
 
                                 <Label Grid.Row="0" Grid.Column="0"
-                                       Text="{Binding Name}"
+                                        Text="{Binding Name}"
                                         FontAttributes ="Bold"/>
-                                <Label Grid.Row="1" Grid.Column="0"
-                                       Text="{Binding date}"/>
+                                <Label Grid.Row="1" Grid.Column="0">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{} {0}$| {1}">
+                                            <Binding Path="price"/>
+                                            <Binding Path="dateString"/>
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
                                 <Button Grid.RowSpan="2" Grid.ColumnSpan="1" Grid.Column="3" Grid.Row="0"
                                           Text="Del"
                                             Clicked="RemoveSelectedDestination"/>
